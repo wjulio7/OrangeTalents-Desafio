@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Cadastro() {
+export default function VacCadastro() {
   const classes = useStyles();
 
   return (
@@ -56,7 +56,7 @@ export default function Cadastro() {
           <LocalHospitalIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Cadastro de usuários Vacina-Já
+          Cadastro de aplicação de vacinas
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -68,7 +68,7 @@ export default function Cadastro() {
                 required
                 fullWidth
                 id="Name"
-                label="Nome"
+                label="Vacina aplicada"
                 autoFocus
               />
               </Grid>
@@ -84,18 +84,7 @@ export default function Cadastro() {
                 autoComplete="email"
               />
             </Grid>
-            <Grid item xs={12}>
-            <TextField
-                autoComplete="cpf"
-                name="cpf"
-                variant="outlined"
-                required
-                fullWidth
-                id="cpf"
-                label="CPF"
-                autoFocus
-              />
-          </Grid>
+          
           <Grid item xs={12}>
             <TextField
                 autoComplete="dnascimento"
@@ -104,7 +93,7 @@ export default function Cadastro() {
                 required
                 fullWidth
                 id="dnascimento"
-                label="Data de nascimento"
+                label="Data de aplicação"
                 autoFocus
               />
              </Grid>
