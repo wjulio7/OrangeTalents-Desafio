@@ -20,9 +20,12 @@ public class vacinajaController {
 
 
     @PostMapping(value = "/userregister", consumes = "application/json", produces = "application/json")
-    ResponseEntity<String> userRegister(@RequestBody @Valid User user) {
+    ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
+        if(result.hasErrors()){
+            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+        }
         vacinajaService.save(user);
-        return new ResponseEntity<>( HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
 }
