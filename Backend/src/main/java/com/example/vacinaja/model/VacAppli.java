@@ -1,7 +1,12 @@
 package com.example.vacinaja.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Entity
@@ -14,8 +19,13 @@ public class VacAppli {
     @NotBlank
     private String vacname;
 
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDate applidate;
+
+    @Email
     @NotBlank
-    private String data;
+    private String email;
 
     @ManyToOne
     private User user;
@@ -44,11 +54,19 @@ public class VacAppli {
         this.vacname = vacname;
     }
 
-    public String getData() {
-        return data;
+    public LocalDate getApplidate() {
+        return applidate;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setApplidate(LocalDate applidate) {
+        this.applidate = applidate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -1,18 +1,18 @@
 package com.example.vacinaja.service.serviceImpl;
 
 import com.example.vacinaja.model.User;
-import com.example.vacinaja.repository.vacinajaRepository;
-import com.example.vacinaja.service.vacinajaService;
+import com.example.vacinaja.repository.userRepository;
+import com.example.vacinaja.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class vacinajaServiceImpl implements vacinajaService {
+public class UserServiceImpl implements userService {
 
     @Autowired
-    vacinajaRepository vacinajarepository;
+    userRepository vacinajarepository;
 
     @Override
     public User save(User user) {

@@ -37,7 +37,9 @@ public class User {
     @Column(unique = true)
     private String cpf;
 
-    private String data;
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private LocalDate birthday;
 
     @OneToMany
     private List<VacAppli> vacappli;
@@ -74,16 +76,11 @@ public class User {
         this.cpf = cpf;
     }
 
-    public String getData() {
-        return data;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
-
-
-
-
-
 }
