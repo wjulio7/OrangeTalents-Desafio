@@ -6,6 +6,8 @@ import com.example.vacinaja.service.vacinajaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class vacinajaServiceImpl implements vacinajaService {
 
@@ -15,5 +17,13 @@ public class vacinajaServiceImpl implements vacinajaService {
     @Override
     public User save(User user) {
         return vacinajarepository.save(user);
+    }
+
+   @Override
+    public User findById(Long id) {
+
+        Optional<User> user2 = vacinajarepository.findById(id);
+        User user = user2.get();
+        return user;
     }
 }
