@@ -1,31 +1,46 @@
 package com.example.vacinaja.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="tb_user")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank//VALIDATO
+    @NotBlank
     private String nome;
 
-    @NotBlank//VALIDA
+    @Email
+    @NotBlank
     @Column(unique = true)
     private String email;
 
-    @NotBlank//VALIDATO
+    @CPF
+    @NotBlank
     @Column(unique = true)
     private String cpf;
 
+    private String data;
+
+    @OneToMany
+    private List<VacAppli> vacappli;
 
     public Long getId() {
         return id;
@@ -58,6 +73,17 @@ public class User {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+
+
 
 
 }
