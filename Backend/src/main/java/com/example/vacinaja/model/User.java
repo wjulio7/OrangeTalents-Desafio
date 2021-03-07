@@ -83,4 +83,12 @@ public class User {
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
+
+    public User(Long id, @NotBlank String nome, @Email @NotBlank String email, @CPF @NotBlank String cpf, @NotNull LocalDate birthday) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.birthday = birthday;
+    }
 }

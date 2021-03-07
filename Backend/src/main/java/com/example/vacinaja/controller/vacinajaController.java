@@ -23,11 +23,8 @@ public class vacinajaController {
     @PostMapping(value = "/userregister", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
         if(result.hasErrors()){
-
             return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
         }
-
-
         us.save(user);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
@@ -37,11 +34,9 @@ public class vacinajaController {
         if(result.hasErrors()){
             return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
         }
-
         User user = us.findById(user_id);
         vacAppli.setUser(user);
         va.save(vacAppli);
-
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
