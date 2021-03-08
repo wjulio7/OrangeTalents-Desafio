@@ -30,7 +30,7 @@ public class vacinajaController {
     }
 
     @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
-    ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody VacAppli vacAppli,   BindingResult result) {
+    ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody @Valid VacAppli vacAppli,   BindingResult result) {
         if(result.hasErrors()){
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
