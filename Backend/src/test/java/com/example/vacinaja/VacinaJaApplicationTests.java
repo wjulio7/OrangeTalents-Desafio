@@ -31,11 +31,11 @@ class VacinaJaApplicationTests {
 
 	}
 
-	long i = 1L;
+	long id = 1L;
 	LocalDate date = LocalDate.parse("2020-01-08");
 	@Test
 	public void saeveUserTest(){
-		User user = new User(i , "Pranya", "a@hotmail.com" , "00000000000", date);
+		User user = new User(id , "Pranya", "a@hotmail.com" , "00000000000", date);
 		when(userrepository.save(user)).thenReturn(user);
 		Assertions.assertEquals(user, userservice.save(user));
 
