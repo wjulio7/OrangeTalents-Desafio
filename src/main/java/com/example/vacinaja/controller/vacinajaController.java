@@ -23,7 +23,7 @@ public class vacinajaController {
     @PostMapping(value = "/userregister", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
         if(result.hasErrors()){
-            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
         us.save(user);
         return new ResponseEntity<>( HttpStatus.CREATED);
@@ -32,7 +32,7 @@ public class vacinajaController {
     @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody VacAppli vacAppli,   BindingResult result) {
         if(result.hasErrors()){
-            return new ResponseEntity<>( HttpStatus.NOT_IMPLEMENTED);
+            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
         User user = us.findById(user_id);
         vacAppli.setUser(user);

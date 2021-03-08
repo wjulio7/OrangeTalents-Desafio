@@ -20,6 +20,16 @@ import java.util.List;
 @Entity
 @Table(name="tb_user")
 public class User {
+
+    public User(Long id, @NotBlank String nome, @Email @NotBlank String email, @CPF @NotBlank String cpf, @NotNull LocalDate birthday) {
+
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.birthday = birthday;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -38,11 +48,16 @@ public class User {
     private String cpf;
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     @OneToMany
     private List<VacAppli> vacappli;
+
+    public User() {
+
+    }
+
 
     public Long getId() {
         return id;
@@ -84,11 +99,6 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(Long id, @NotBlank String nome, @Email @NotBlank String email, @CPF @NotBlank String cpf, @NotNull LocalDate birthday) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.cpf = cpf;
-        this.birthday = birthday;
-    }
+
+
 }

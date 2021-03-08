@@ -1,6 +1,7 @@
 package com.example.vacinaja;
 
 import com.example.vacinaja.model.User;
+import com.example.vacinaja.model.VacAppli;
 import com.example.vacinaja.repository.userRepository;
 import com.example.vacinaja.service.userService;
 import org.junit.jupiter.api.Assertions;
@@ -33,12 +34,12 @@ class VacinaJaApplicationTests {
 
 	long id = 1L;
 	LocalDate date = LocalDate.parse("2020-01-08");
+
 	@Test
 	public void saeveUserTest(){
-		User user = new User(id , "Pranya", "a@hotmail.com" , "00000000000", date);
+		User user = new User(id , "Pranya", "a@hotmail.com" , "77103210039", date);
 		when(userrepository.save(user)).thenReturn(user);
 		Assertions.assertEquals(user, userservice.save(user));
-
-
 	}
+
 }

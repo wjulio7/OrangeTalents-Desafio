@@ -20,7 +20,7 @@ public class VacAppli {
     private String vacname;
 
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate applidate;
 
     @Email
@@ -29,6 +29,7 @@ public class VacAppli {
 
     @ManyToOne
     private User user;
+
 
     public Long getId() {
         return id;
@@ -69,4 +70,6 @@ public class VacAppli {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }
