@@ -1,9 +1,11 @@
 package com.example.vacinaja.controller;
 
+import com.example.vacinaja.factory.StrategyFactory;
 import com.example.vacinaja.model.User;
 import com.example.vacinaja.model.VacAppli;
 import com.example.vacinaja.service.VacappliService;
 import com.example.vacinaja.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Controller
+@AllArgsConstructor
 public class vacinajaController {
 
 
@@ -24,6 +27,8 @@ public class vacinajaController {
 
     @Autowired
     VacappliService vacappliService;
+
+    private final StrategyFactory strategyFactory;
 
     @PostMapping(value = "/users/signup", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
@@ -45,12 +50,21 @@ public class vacinajaController {
     }
 
     @GetMapping("/users/s")
-    ResponseEntity<String> teste() {
-        LocalDate data = LocalDate.of(2019, 4, 3);
-        data = data.plusDays(10);
-        return ResponseEntity.status(OK).body(data.toString());
+    ResponseEntity<?> teste() {
+        LocalDate data = LocalDate.of(2019, 4, 1);
+
+        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
     }
 
+    @GetMapping("/users/s2/{user_id}")
+    ResponseEntity<?> teste2(@PathVariable("user_id") long user_id) {
+        VacAppli vacAppli = vacappliService.findByUser_id(user_id);
+        return ResponseEntity.status(OK).body(vacAppli);
+        //User user = userService.findById(user_id);
+        //LocalDate data = LocalDate.of(2019, 4, 1);
+        //return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
+
+    }
 
 }
 

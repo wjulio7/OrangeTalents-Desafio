@@ -34,6 +34,7 @@ private JwtTokenProvider jwtTokenProvider;
                 .antMatchers("/users/signin").permitAll()//
                 .antMatchers("/users/signup").permitAll()//
                 .antMatchers("/users/s").permitAll()
+                .antMatchers("/users/s2/{user_id}").permitAll()
                 .antMatchers("/h2-console/**/**").permitAll()
                 // Disallow everything else..
                 .anyRequest().authenticated();

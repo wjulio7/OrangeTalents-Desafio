@@ -1,6 +1,7 @@
 package com.example.vacinaja.service.serviceImpl;
 
 
+import com.example.vacinaja.model.User;
 import com.example.vacinaja.model.VacAppli;
 import com.example.vacinaja.repository.vacApplicationRepository;
 import com.example.vacinaja.service.VacappliService;
@@ -16,6 +17,11 @@ public class vacappliServiceImpl implements VacappliService {
     @Override
     public VacAppli save(VacAppli vacappli) {
         return vacapplicationrepository.save(vacappli);
+    }
+
+    @Override
+    public VacAppli findByUser_id(Long user_id){
+        return vacapplicationrepository.findByUser_id(user_id);
     }
 
 }
