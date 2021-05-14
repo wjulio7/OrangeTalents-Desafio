@@ -3,7 +3,7 @@ package com.example.vacinaja.controller;
 import com.example.vacinaja.model.User;
 import com.example.vacinaja.model.VacAppli;
 import com.example.vacinaja.service.vacappliService;
-import com.example.vacinaja.service.userService;
+import com.example.vacinaja.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,15 @@ import javax.validation.Valid;
 
 @Controller
 public class vacinajaController {
-     @Autowired
-     userService us;
+
+
+    @Autowired
+    UserService us;
+
     @Autowired
     vacappliService va;
 
-    @PostMapping(value = "/userregister", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/users/signup", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
         if(result.hasErrors()){
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
@@ -28,6 +31,7 @@ public class vacinajaController {
         us.save(user);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
+    
 
     @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody @Valid VacAppli vacAppli,   BindingResult result) {
@@ -39,7 +43,6 @@ public class vacinajaController {
         va.save(vacAppli);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
-
 
 }
 

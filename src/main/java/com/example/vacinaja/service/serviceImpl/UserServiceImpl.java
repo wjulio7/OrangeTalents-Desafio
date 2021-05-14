@@ -1,20 +1,19 @@
 package com.example.vacinaja.service.serviceImpl;
 
 import com.example.vacinaja.model.User;
-import com.example.vacinaja.repository.userRepository;
-import com.example.vacinaja.service.userService;
+import com.example.vacinaja.repository.UserRepository;
+import com.example.vacinaja.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
-public class UserServiceImpl implements userService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    userRepository  userrepository;
+    UserRepository userrepository;
     private static Pattern PATTERN_GENERIC = Pattern.compile("[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}");
     private static Pattern PATTERN_NUMBERS = Pattern.compile("(?=^((?!((([0]{11})|([1]{11})|([2]{11})|([3]{11})|([4]{11})|([5]{11})|([6]{11})|([7]{11})|([8]{11})|([9]{11})))).)*$)([0-9]{11})");
     //CPF VALIDATOR
@@ -72,5 +71,10 @@ public class UserServiceImpl implements userService {
         Optional<User> user2 = userrepository.findById(id);
         User user = user2.get();
         return user;
+    }
+
+    @Override
+    public User findByUsername(String username){
+        return userrepository.findByUsername(username);
     }
 }
