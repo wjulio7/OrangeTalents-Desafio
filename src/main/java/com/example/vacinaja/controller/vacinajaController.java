@@ -53,27 +53,17 @@ public class vacinajaController {
         return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
     }
 
-    @GetMapping("/users~l/s2/{user_id}")
+    @GetMapping("/users/s2/{user_id}")
     ResponseEntity<?> teste2(@PathVariable("user_id") long user_id) {
         VacAppli vacAppli = vacappliService.findByUser_id(user_id);
 
        // return ResponseEntity.status(OK).body(vacAppli.getApplidate());
-        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(vacAppli.getApplidate()));
+        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyPFIZER").getGenericResponse(vacAppli.getApplidate()));
         //User user = userService.findById(user_id);
         //LocalDate data = LocalDate.of(2019, 4, 1);
         //return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
 
     }
-    @GetMapping("/usersl/s/{user_id}")
-    ResponseEntity<?> coronavac(@PathVariable("user_id") long user_id) {
-        VacAppli vacAppli = vacappliService.findByUser_id(user_id);
 
-        // return ResponseEntity.status(OK).body(vacAppli.getApplidate());
-        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(vacAppli.getApplidate()));
-        //User user = userService.findById(user_id);
-        //LocalDate data = LocalDate.of(2019, 4, 1);
-        //return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
-
-    }
 }
 

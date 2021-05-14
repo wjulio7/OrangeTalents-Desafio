@@ -9,20 +9,20 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Service
-public class StrategyFGTS implements Strategy {
+public class StrategyPFIZER implements Strategy {
 
     @Override
     public String getResponse() {
         return "I am instance of StrategyFGTS";
     }
 
-    @Override//tentei tirar redundancias
-    public LocalDate getGenericResponse(LocalDate valor) {
-        return  valor;
+    @Override //Coronavac 21 dias
+    public LocalDate getGenericResponse(LocalDate data) {
+        return data.plusDays(21);
     }
 
     @Override
     public StrategyName init() {
-        return StrategyName.StrategyFGTS;
+        return StrategyName.StrategyPFIZER;
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 
 @Service
-public class StrategyICMS implements Strategy {
+public class StrategyCORONAVAC implements Strategy {
 
     @Override
     public String getResponse() {

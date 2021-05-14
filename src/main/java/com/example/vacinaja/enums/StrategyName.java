@@ -1,7 +1,7 @@
 package com.example.vacinaja.enums;
 
 public enum StrategyName {
-    StrategyFGTS,
+    StrategyPFIZER,
     StrategyISS,
     StrategyCORONAVAC
 }
