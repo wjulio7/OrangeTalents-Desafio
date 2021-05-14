@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.http.HttpStatus.OK;
 
 import javax.validation.Valid;
 
@@ -23,15 +24,16 @@ public class vacinajaController {
     @Autowired
     vacappliService va;
 
+
+
     @PostMapping(value = "/users/signup", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
         if(result.hasErrors()){
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
         }
-        us.save(user);
-        return new ResponseEntity<>( HttpStatus.CREATED);
+        return ResponseEntity.status(OK).body(us.save(user));
     }
-    
+
 
     @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody @Valid VacAppli vacAppli,   BindingResult result) {

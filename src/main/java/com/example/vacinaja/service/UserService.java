@@ -4,7 +4,7 @@ import com.example.vacinaja.model.User;
 
 public interface UserService {
 
-    User save(User user);
+    String save(User user);
     User findById(Long id);
     User findByUsername(String username);
 }

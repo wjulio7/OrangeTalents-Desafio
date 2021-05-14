@@ -2,8 +2,10 @@ package com.example.vacinaja.service.serviceImpl;
 
 import com.example.vacinaja.model.User;
 import com.example.vacinaja.repository.UserRepository;
+import com.example.vacinaja.security.JwtTokenProvider;
 import com.example.vacinaja.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,6 +13,12 @@ import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     @Autowired
     UserRepository userrepository;
@@ -52,7 +60,7 @@ public class UserServiceImpl implements UserService {
     Pattern pattern = Pattern.compile(EMAIL_VERIFICATION);
 
     @Override
-    public User save(User user) {
+    public String save(User user) {
         if (user.getEmail().trim().isEmpty() ){
             throw new RuntimeException("erro");
         }
@@ -62,7 +70,9 @@ public class UserServiceImpl implements UserService {
         if(!isValid(user.getCpf())){
             throw new RuntimeException("CPF INVALID");
         }
-        return userrepository.save(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userrepository.save(user);
+        return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
     }
 
    @Override
