@@ -12,16 +12,16 @@ public class StrategyICMS implements Strategy {
 
     @Override
     public String getResponse() {
-        return "I am instance of StrategyICMS";}
+        return "I am instance of StrategyCORONAVAC";}
 
-    @Override //São Paulo, cuja alíquota é de 18%
+    @Override //Coronavac 14 dias
     public LocalDate getGenericResponse(LocalDate data) {
         return data.plusDays(14);
     }
 
     @Override
     public StrategyName init() {
-        return StrategyName.StrategyICMS;
+        return StrategyName.StrategyCORONAVAC;
     }
 }
 
