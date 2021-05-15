@@ -9,19 +9,19 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Service
-public class StrategyISS implements Strategy {
+public class StrategyASTRAZENECA implements Strategy {
 
     @Override
     public String getResponse() {
         return "I am instance of StrategyISS";    }
 
-    @Override//São Paulo, cuja alíquota é de 2%
-    public LocalDate getGenericResponse(LocalDate valor) {
-        return  valor;
+    @Override //Astrazeneca 90 dias
+    public LocalDate getGenericResponse(LocalDate data) {
+        return data.plusDays(90);
     }
 
     @Override
     public StrategyName init() {
-        return StrategyName.StrategyISS;
+        return StrategyName.StrategyASTRAZENECA;
     }
 }

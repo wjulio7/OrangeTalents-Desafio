@@ -58,7 +58,7 @@ public class vacinajaController {
         VacAppli vacAppli = vacappliService.findByUser_id(user_id);
 
        // return ResponseEntity.status(OK).body(vacAppli.getApplidate());
-        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyPFIZER").getGenericResponse(vacAppli.getApplidate()));
+        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyASTRAZENECA").getGenericResponse(vacAppli.getApplidate()));
         //User user = userService.findById(user_id);
         //LocalDate data = LocalDate.of(2019, 4, 1);
         //return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));

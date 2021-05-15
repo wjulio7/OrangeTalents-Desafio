@@ -28,7 +28,14 @@ public class VacConsultation {
     @GetMapping("/pfizer/{user_id}")
     ResponseEntity<?> pfizer(@PathVariable("user_id") long user_id) {
         VacAppli vacAppli = vacappliService.findByUser_id(user_id);
-        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyPFIZER").getGenericResponse(vacAppli.getApplidate()));
-
+        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyASTRAZENECA").getGenericResponse(vacAppli.getApplidate()));
     }
+
+    @GetMapping("/astrazeneca/{user_id}")
+    ResponseEntity<?> teste2(@PathVariable("user_id") long user_id) {
+        VacAppli vacAppli = vacappliService.findByUser_id(user_id);
+        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyASTRAZENECA").getGenericResponse(vacAppli.getApplidate()));
+    }
+
+
 }
