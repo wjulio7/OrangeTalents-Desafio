@@ -5,6 +5,10 @@ import com.example.vacinaja.model.User;
 import com.example.vacinaja.model.VacAppli;
 import com.example.vacinaja.service.VacappliService;
 import com.example.vacinaja.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +38,14 @@ public class vacinajaController {
         }
         return ResponseEntity.status(OK).body(userService.save(user));
     }
+
+    @PostMapping("/users/signin")
+    ResponseEntity<String> login(//
+                        @ApiParam("username") @RequestParam String username, //
+                        @ApiParam("password") @RequestParam String password) {
+        return ResponseEntity.ok(userService.signin(username, password));
+    }
+
 
     @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody @Valid VacAppli vacAppli,   BindingResult result) {

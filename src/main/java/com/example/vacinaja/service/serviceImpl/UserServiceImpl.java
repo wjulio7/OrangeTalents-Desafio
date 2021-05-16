@@ -1,10 +1,15 @@
 package com.example.vacinaja.service.serviceImpl;
 
+import com.example.vacinaja.exception.CustomException;
 import com.example.vacinaja.model.User;
 import com.example.vacinaja.repository.UserRepository;
 import com.example.vacinaja.security.JwtTokenProvider;
 import com.example.vacinaja.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +24,18 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Override
+    public String signin(String username, String password) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            return jwtTokenProvider.createToken(username, userrepository.findByUsername(username).getRoles());
+        } catch (AuthenticationException e) {
+            throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+    }
 
     @Autowired
     UserRepository userrepository;
