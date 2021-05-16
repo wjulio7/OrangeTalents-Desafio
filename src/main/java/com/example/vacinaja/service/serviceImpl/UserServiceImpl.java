@@ -88,6 +88,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("CPF INVALID");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(false);
         userrepository.save(user);
         return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
     }

@@ -23,7 +23,7 @@ import java.time.LocalDate;
 
 @Controller
 @AllArgsConstructor
-public class vacinajaController {
+public class VacinajaController {
 
     private final UserService userService;
 
@@ -40,12 +40,11 @@ public class vacinajaController {
     }
 
     @PostMapping("/users/signin")
-    ResponseEntity<String> login(//
-                        @ApiParam("username") @RequestParam String username, //
+    ResponseEntity<String> login(
+                        @ApiParam("username") @RequestParam String username,
                         @ApiParam("password") @RequestParam String password) {
         return ResponseEntity.ok(userService.signin(username, password));
     }
-
 
     @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody @Valid VacAppli vacAppli,   BindingResult result) {
@@ -57,27 +56,6 @@ public class vacinajaController {
         vacappliService.save(vacAppli);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
-
-    @GetMapping("/users/s")
-    ResponseEntity<?> teste() {
-        LocalDate data = LocalDate.of(2019, 4, 1);
-
-        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
-    }
-
-    @GetMapping("/users/s2/{user_id}")
-    ResponseEntity<?> teste2(@PathVariable("user_id") long user_id) {
-        VacAppli vacAppli = vacappliService.findByUser_id(user_id);
-
-       // return ResponseEntity.status(OK).body(vacAppli.getApplidate());
-        return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyASTRAZENECA").getGenericResponse(vacAppli.getApplidate()));
-        //User user = userService.findById(user_id);
-        //LocalDate data = LocalDate.of(2019, 4, 1);
-        //return ResponseEntity.ok(strategyFactory.findStrategyByType("StrategyICMS").getGenericResponse(data));
-
-    }
-
-
 
 }
 

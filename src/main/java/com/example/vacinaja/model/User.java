@@ -51,6 +51,8 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
+    private boolean enabled;
+
     @OneToMany
     private List<VacAppli> vacappli;
 

@@ -20,7 +20,7 @@ public class MyUserDetails implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         final User user = userService.findByUsername(username);
 
-        if (user == null) {
+        if (user == null || !user.isEnabled()) {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
 
