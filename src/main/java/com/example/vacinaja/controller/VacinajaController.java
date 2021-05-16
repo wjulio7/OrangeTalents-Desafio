@@ -3,6 +3,7 @@ package com.example.vacinaja.controller;
 import com.example.vacinaja.factory.StrategyFactory;
 import com.example.vacinaja.model.User;
 import com.example.vacinaja.model.VacAppli;
+import com.example.vacinaja.service.AuthService;
 import com.example.vacinaja.service.VacappliService;
 import com.example.vacinaja.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -23,13 +24,13 @@ import java.time.LocalDate;
 
 @Controller
 @AllArgsConstructor
+@RequestMapping("/api/auth")
 public class VacinajaController {
 
     private final UserService userService;
-
     private final VacappliService vacappliService;
-
     private final StrategyFactory strategyFactory;
+    private final AuthService authService;
 
     @PostMapping(value = "/users/signup", consumes = "application/json", produces = "application/json")
     ResponseEntity<String> userRegister(@RequestBody @Valid User user, BindingResult result) {
@@ -55,6 +56,12 @@ public class VacinajaController {
         vacAppli.setUser(user);
         vacappliService.save(vacAppli);
         return new ResponseEntity<>( HttpStatus.CREATED);
+    }
+
+    @GetMapping("/accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+        authService.verifyAccount(token);
+        return new ResponseEntity<>("Account Activated Successfully", OK);
     }
 
 }

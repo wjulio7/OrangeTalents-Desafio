@@ -112,6 +112,9 @@ public class UserServiceImpl implements UserService {
         return "Sucessfull";
     }
 
+
+
+
     private String generateVerificationToken(User user) {
         String token = UUID.randomUUID().toString();
         VerificationToken verificationToken = new VerificationToken();
