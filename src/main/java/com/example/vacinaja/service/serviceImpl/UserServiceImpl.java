@@ -1,10 +1,15 @@
 package com.example.vacinaja.service.serviceImpl;
 
 import com.example.vacinaja.exception.CustomException;
+import com.example.vacinaja.model.NotificationEmail;
 import com.example.vacinaja.model.User;
+import com.example.vacinaja.model.VerificationToken;
 import com.example.vacinaja.repository.UserRepository;
+import com.example.vacinaja.repository.VerificationTokenRepository;
 import com.example.vacinaja.security.JwtTokenProvider;
+import com.example.vacinaja.service.MailService;
 import com.example.vacinaja.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,11 +17,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -26,6 +34,11 @@ public class UserServiceImpl implements UserService {
     private JwtTokenProvider jwtTokenProvider;
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private VerificationTokenRepository verificationTokenRepository;
 
     @Override
     public String signin(String username, String password) {
@@ -90,14 +103,28 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(false);
         userrepository.save(user);
-        return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
+
+        String token = generateVerificationToken(user);
+        mailService.sendMail(new NotificationEmail("Please Activate your Account",
+                user.getEmail(), "Thank you for signing up to Spring Reddit, " +
+                "please click on the below url to activate your account : " +
+                "http://localhost:8080/api/auth/accountVerification/" + token));
+        return "Sucessfull";
+    }
+
+    private String generateVerificationToken(User user) {
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken();
+        verificationToken.setToken(token);
+        verificationToken.setUser(user);
+        verificationTokenRepository.save(verificationToken);
+        return token;
     }
 
    @Override
     public User findById(Long id) {
         Optional<User> user2 = userrepository.findById(id);
-        User user = user2.get();
-        return user;
+       return user2.get();
     }
 
     @Override
