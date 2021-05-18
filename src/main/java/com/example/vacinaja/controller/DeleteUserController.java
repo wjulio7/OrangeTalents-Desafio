@@ -21,7 +21,7 @@ public class DeleteUserController {
 
     @DeleteMapping(value = "/{username}")
     @PreAuthorize("hasRole('ROLE_DOCTOR')")
-    ResponseEntity<?> delete(@ApiParam("username") @PathVariable String username) {
+    ResponseEntity<?> delete(@PathVariable String username) {
        return ResponseEntity.status(OK).body( userService.delete(username));
 
     }

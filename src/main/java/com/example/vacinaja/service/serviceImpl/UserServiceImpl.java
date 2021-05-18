@@ -137,7 +137,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String delete(String username) {
-        userrepository.deleteByUsername(username);
-        return username;
+        User user = findByUsername(username);
+        verificationTokenRepository.deleteByUserId(user.getId());
+        return userrepository.deleteByUsername(username);
+
     }
 }

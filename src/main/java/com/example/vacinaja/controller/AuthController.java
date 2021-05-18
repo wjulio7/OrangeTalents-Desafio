@@ -47,16 +47,7 @@ public class AuthController {
         return ResponseEntity.ok(userService.signin(username, password));
     }
 
-    @PostMapping(value = "/vacapplication/{user_id}", consumes = "application/json", produces = "application/json")
-    ResponseEntity<String> vacApplication(@PathVariable("user_id") long user_id, @RequestBody @Valid VacAppli vacAppli,   BindingResult result) {
-        if(result.hasErrors()){
-            return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
-        }
-        User user = userService.findById(user_id);
-        vacAppli.setUser(user);
-        vacappliService.save(vacAppli);
-        return new ResponseEntity<>( HttpStatus.CREATED);
-    }
+
 
     @GetMapping("/accountVerification/{token}")
     public ResponseEntity<String> verifyAccount(@PathVariable String token) {
