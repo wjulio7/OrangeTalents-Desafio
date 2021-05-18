@@ -25,7 +25,7 @@ import java.time.LocalDate;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/api/auth")
-public class VacinajaController {
+public class AuthController {
 
     private final UserService userService;
     private final VacappliService vacappliService;

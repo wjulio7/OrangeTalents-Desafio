@@ -4,7 +4,6 @@ import com.example.vacinaja.factory.StrategyFactory;
 import com.example.vacinaja.model.VacAppli;
 import com.example.vacinaja.service.VacappliService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
